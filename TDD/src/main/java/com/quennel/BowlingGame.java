@@ -22,7 +22,7 @@ public class BowlingGame {
                 score += PINS_IN_FRAME + strikeBonus(rollIndex);
                 rollIndex += 1;
             } else if (isSpare(rollIndex)) {
-                score += PINS_IN_FRAME + rolls[rollIndex + 2];
+                score += PINS_IN_FRAME + spareBonus(rollIndex);
                 rollIndex += 2;
             } else {
                 score += rolls[rollIndex] + rolls[rollIndex + 1];
@@ -42,5 +42,9 @@ public class BowlingGame {
 
     private int strikeBonus(int rollIndex) {
         return rolls[rollIndex + 1] + rolls[rollIndex + 2];
+    }
+
+    private int spareBonus(int rollIndex) {
+        return rolls[rollIndex + 2];
     }
 }
