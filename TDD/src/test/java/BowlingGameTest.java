@@ -45,4 +45,13 @@ public class BowlingGameTest {
         }
         assertEquals(24, game.getScore()); // 10 + 3 + 4 + 3 + 4 = 24
     }
+
+    @Test
+    public void testPerfectGame() {
+        BowlingGame game = new BowlingGame();
+        for (int i = 0; i < 12; i++) {
+            game.roll(10); // 每次都是STRIKE
+        }
+        assertEquals(300, game.getScore()); // 总得分应为300
+    }
 }
