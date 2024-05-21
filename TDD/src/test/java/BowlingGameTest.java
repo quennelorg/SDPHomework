@@ -33,4 +33,16 @@ public class BowlingGameTest {
         }
         assertEquals(16, game.getScore()); // 10 + 3 + 3 = 16
     }
+
+    @Test
+    public void testOneStrike() {
+        BowlingGame game = new BowlingGame();
+        game.roll(10); // STRIKE
+        game.roll(3);
+        game.roll(4);
+        for (int i = 0; i < 16; i++) {
+            game.roll(0); // 剩下的球都没有击倒球瓶
+        }
+        assertEquals(24, game.getScore()); // 10 + 3 + 4 + 3 + 4 = 24
+    }
 }
