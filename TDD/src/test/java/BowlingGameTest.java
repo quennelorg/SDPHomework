@@ -21,4 +21,16 @@ public class BowlingGameTest {
         }
         assertEquals(20, game.getScore()); // 总得分应该为20
     }
+
+    @Test
+    public void testOneSpare() {
+        BowlingGame game = new BowlingGame();
+        game.roll(5);
+        game.roll(5); // SPARE
+        game.roll(3); // 下一球
+        for (int i = 0; i < 17; i++) {
+            game.roll(0); // 剩下的球都没有击倒球瓶
+        }
+        assertEquals(16, game.getScore()); // 10 + 3 + 3 = 16
+    }
 }
