@@ -18,18 +18,28 @@ public class BowlingGame {
         int score = 0;
         int rollIndex = 0;
         for (int frame = 0; frame < MAX_FRAMES; frame++) {
-            if (isStrike(rollIndex)) {
-                score += PINS_IN_FRAME + strikeBonus(rollIndex);
-                rollIndex += 1;
-            } else if (isSpare(rollIndex)) {
-                score += PINS_IN_FRAME + spareBonus(rollIndex);
-                rollIndex += 2;
-            } else {
-                score += sumOfBallsInFrame(rollIndex);
-                rollIndex += 2;
-            }
+            score += scoreForFrame(rollIndex);
+            rollIndex = nextRollIndex(rollIndex);
         }
         return score;
+    }
+
+    private int scoreForFrame(int rollIndex) {
+        if (isStrike(rollIndex)) {
+            return strikeScore(rollIndex);
+        } else if (isSpare(rollIndex)) {
+            return spareScore(rollIndex);
+        } else {
+            return frameScore(rollIndex);
+        }
+    }
+
+    private int nextRollIndex(int rollIndex) {
+        if (isStrike(rollIndex)) {
+            return rollIndex + 1;
+        } else {
+            return rollIndex + 2;
+        }
     }
 
     private boolean isSpare(int rollIndex) {
@@ -40,15 +50,15 @@ public class BowlingGame {
         return rolls[rollIndex] == PINS_IN_FRAME;
     }
 
-    private int strikeBonus(int rollIndex) {
-        return rolls[rollIndex + 1] + rolls[rollIndex + 2];
+    private int strikeScore(int rollIndex) {
+        return PINS_IN_FRAME + rolls[rollIndex + 1] + rolls[rollIndex + 2];
     }
 
-    private int spareBonus(int rollIndex) {
-        return rolls[rollIndex + 2];
+    private int spareScore(int rollIndex) {
+        return PINS_IN_FRAME + rolls[rollIndex + 2];
     }
 
-    private int sumOfBallsInFrame(int rollIndex) {
+    private int frameScore(int rollIndex) {
         return rolls[rollIndex] + rolls[rollIndex + 1];
     }
 }
