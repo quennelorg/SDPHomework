@@ -19,7 +19,7 @@ public class BowlingGame {
         int rollIndex = 0;
         for (int frame = 0; frame < MAX_FRAMES; frame++) {
             if (isStrike(rollIndex)) {
-                score += PINS_IN_FRAME + rolls[rollIndex + 1] + rolls[rollIndex + 2];
+                score += PINS_IN_FRAME + strikeBonus(rollIndex);
                 rollIndex += 1;
             } else if (isSpare(rollIndex)) {
                 score += PINS_IN_FRAME + rolls[rollIndex + 2];
@@ -38,5 +38,9 @@ public class BowlingGame {
 
     private boolean isStrike(int rollIndex) {
         return rolls[rollIndex] == PINS_IN_FRAME;
+    }
+
+    private int strikeBonus(int rollIndex) {
+        return rolls[rollIndex + 1] + rolls[rollIndex + 2];
     }
 }
