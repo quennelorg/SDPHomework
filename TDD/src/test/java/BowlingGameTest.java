@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BowlingGameTest {
     @Test
-    public void testAllGutterBalls() {
+    public void testAllGutterBallsShouldScoreZero() {
         BowlingGame game = new BowlingGame();
         for (int i = 0; i < 20; i++) {
             game.roll(0); // 每一轮的两次扔球都没有碰到球
@@ -14,7 +14,7 @@ public class BowlingGameTest {
     }
 
     @Test
-    public void testAllOnes() {
+    public void testAllOnesShouldScoreTwenty() {
         BowlingGame game = new BowlingGame();
         for (int i = 0; i < 20; i++) {
             game.roll(1); // 每次扔球击倒一个球瓶
@@ -23,7 +23,7 @@ public class BowlingGameTest {
     }
 
     @Test
-    public void testOneSpare() {
+    public void testOneSpareFollowedByThreeShouldScoreSixteen() {
         BowlingGame game = new BowlingGame();
         game.roll(5);
         game.roll(5); // SPARE
@@ -35,7 +35,7 @@ public class BowlingGameTest {
     }
 
     @Test
-    public void testOneStrike() {
+    public void testOneStrikeFollowedByThreeAndFourShouldScoreTwentyFour() {
         BowlingGame game = new BowlingGame();
         game.roll(10); // STRIKE
         game.roll(3);
@@ -47,7 +47,7 @@ public class BowlingGameTest {
     }
 
     @Test
-    public void testPerfectGame() {
+    public void testPerfectGameShouldScoreThreeHundred() {
         BowlingGame game = new BowlingGame();
         for (int i = 0; i < 12; i++) {
             game.roll(10); // 每次都是STRIKE
